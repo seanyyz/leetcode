@@ -29,7 +29,8 @@ foreach(TEST_CASE_DIR ${TEST_CASE_DIRS})
         # e.g., TEST_CASE_DIR is ".../leetcode/test/two-sum",
         #       then TEST_CASE_PATH is set to "two-sum"
         file(RELATIVE_PATH TEST_CASE_PATH "${CMAKE_CURRENT_LIST_DIR}/test" ${TEST_CASE_DIR})
-        set(TEST_CASE_NAME "${TEST_CASE_PATH}.test")
+        string(REGEX REPLACE "[()]" "_" TEST_CASE_PATH_PARSED ${TEST_CASE_PATH})
+        set(TEST_CASE_NAME "${TEST_CASE_PATH_PARSED}.test")
         # glob all source
         file(GLOB_RECURSE TEST_CASE_SRCS "${TEST_CASE_DIR}/*")
         add_executable(${TEST_CASE_NAME} ${TEST_CASE_SRCS})
